@@ -11,8 +11,8 @@ before_install:
   - chmod +x mvnw
 
 after_success:
-  - docker login -e $DOCKERHUB_ACCOUNT_SECRET -u $DOCKERHUB_USERNAME_SECRET -p $DOCKERHUB_PASSWORD_SECRET
-  - export REPO=sebestblog/travis-demo
+  - docker login -u $DOCKERHUB_USERNAME_SECRET -p $DOCKERHUB_PASSWORD_SECRET
+  - export REPO=andreasholteritter/fugl
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
   - docker build -f Dockerfile -t $REPO:$COMMIT .
   - docker tag $REPO:$COMMIT $REPO:$TAG
