@@ -6,7 +6,7 @@ services:
   - docker
 
 before_install:
-  - docker build . -t "$VERSION" --build-arg version=$VERSION
+  - docker build -t ritter/fugl .
 
 script:
   - docker images ritter/fugl
