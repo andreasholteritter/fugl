@@ -1,0 +1,18 @@
+language: java
+
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t ritter/fugl .
+
+script:
+  - docker images ritter/fugl
+
+after_success:
+  - if ["TRAVIS_BRANCH" == "master"]; then
+    docker login -e="DOCKERHUB_ACCOUNT_SECRET" -u="DOCKERHUB_USERNAME_SECRET" -p="DOCKERHUB_PASSWORD_SECRET";
+    docker push ritter/fugl
+    fi
