@@ -10,9 +10,9 @@ after_success:
 - export REPO=andreasholteritter/fugl
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH
   ; fi`
-- docker build -f Dockerfile -t $REPO:$COMMIT .
-- docker tag $REPO:$COMMIT andreasholteritter/fugl:$TAG
-- docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+- docker build -f Dockerfile -t andreasholteritter/fugl .
+- docker tag andreasholteritter/fugl andreasholteritter/fugl:$TAG
+- docker tag andreasholteritter/fugl andreasholteritter/fugl:travis-$TRAVIS_BUILD_NUMBER
 - docker push $DOCKERHUB_USERNAME_SECRET/andreasholteritter/fugl
 env:
   global:
