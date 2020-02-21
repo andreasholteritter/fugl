@@ -2,11 +2,13 @@ language: java
 
 sudo: required
 
+dist: trusty
+
 services:
   - docker
 
-script:
-  - docker images ritter/fugl
+before_install:
+  - chmod +x mvnw
 
 after_success:
   - docker login -e $DOCKERHUB_ACCOUNT_SECRET -u $DOCKERHUB_USERNAME_SECRET -p $DOCKERHUB_PASSWORD_SECRET
