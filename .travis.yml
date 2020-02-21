@@ -7,13 +7,13 @@ before_install:
 - chmod +x mvnw
 after_success:
 - docker login -u $DOCKERHUB_USERNAME_SECRET -p $DOCKERHUB_PASSWORD_SECRET
-- export REPO=https://github.com/andreasholteritter/fugl
+- export REPO=andreasholteritter/fugl
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH
   ; fi`
 - docker build -f Dockerfile -t $REPO:$COMMIT .
-- docker tag $REPO:$COMMIT $REPO:$TAG
+- docker tag $REPO:$COMMIT andreasholteritter/fugl:$TAG
 - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
-- docker push $REPO
+- docker push $DOCKERHUB_USERNAME_SECRET/andreasholteritter/fugl
 env:
   global:
   - secure: gJOWx9HrfsnXS+TkAd8W9xrikPOtnonaLSiiEsmCvy/jmOdjEwBb05Vqc7CBJzLbCc6BvUjCieMFIbaDGNKOF/jBdpA4uTecbtweTkACvfknOtcd8TQmHiCZZoVofEykHJNePO3y05GScT7291c7qBcSb7ODfybtoCRqfZjAskzz9V/Uksc6LfSqBQWYnGwqnWfQjcowhoicDjLrwyWVXVYLtx8+U0SOf8enG7d2TsIGu4MzKNwbp0gp8aA1g/klMb7A+LNOb7W1g16tyUIMxOl22GRYszaNmxXFZMeR+CB7/D9a70wbtLGvJR57Z+4MFwa+7O1CVO9etabjqC3vKGr8fSJCSpi4eT7+CjcXV8qHEN5GoI/bcJQW3YY4rF+5w9pVrseMgSC1jDBkYolIeZTiDXNoZNByaAJK07/ZH9f0DISH3FGxMc/sBhdUXtAthzWRa3P9BYMhNV4xIpWDG1S9fa/cjbb1+dM59M8eNci5fS+qQ4iHibC6mqM2RbvJZkd+54D8BzM/Qvwp+4IjCN8jT2u5rRt4PsqvSWgb7iA02nHdEfincxBC6o6Lo+7P24Gk72s+Ot9b8MTlfisHGNHu3nFviNap/BKDQLojvYTtukur2Aus0NILr4LZ+1jqRrGlfq4QRaaHzLyGhkJn4P2+KwIxGVrWW3Ap8bzXYxs=
